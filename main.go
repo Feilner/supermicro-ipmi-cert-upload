@@ -206,7 +206,9 @@ func main() {
 	}
 
 	ip := flag.Arg(0)
-	client := http.DefaultClient
+        customTransport := &(*http.DefaultTransport.(*http.Transport)) // make shallow copy
+        customTransport.TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
+        client := &http.Client{Transport: customTransport}
 	if len(*certFilePtr) == 0 {
 		*certFilePtr = filepath.Join(*basePathPtr, "ipmi_"+ip+".crt");
 	}
