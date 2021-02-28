@@ -11,6 +11,7 @@ import (
 	"mime/multipart"
 	"net/http"
 	"net/url"
+	"crypto/tls"
 	"os"
 	"path/filepath"
 	"strings"
